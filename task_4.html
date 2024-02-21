@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Лаба 4</title>
+	<script>
+		function solution_task_1() {
+			function check(j = 0) {
+				let res = 0;
+
+				if (j == n) {
+					return 1;
+				}
+
+				for (let i = 0; i < n; i++) {
+					if (h[i] && v[j] && dm[i + j] && ds[n - j - 1 + i]) {
+						h[i] = 0;
+						v[j] = 0;
+						dm[i + j] = 0;
+						ds[n - j - 1 + i] = 0;
+
+						res += check(j + 1);
+
+						h[i] = 1;
+						v[j] = 1;
+						dm[i + j] = 1;
+						ds[n - j - 1 + i] = 1;
+					}
+				}
+
+				return res;
+			}
+
+			var n = document.getElementById("t1_n").value;
+			document.getElementById("t1_n_text").innerHTML = n;
+
+			var h = []; h.length = n; h.fill(1);
+			var v = []; v.length = n; v.fill(1);
+			var dm = []; dm.length = 2 * n - 1; dm.fill(1);
+			var ds = []; ds.length = 2 * n - 1; ds.fill(1);
+
+			document.getElementById("answer_1").innerHTML = "Ответ на задачу:  " + check();
+		}
+	</script>
+	<style type="text/css">
+		body {
+			padding: 5px;
+		}
+		td {
+			padding: 10px;
+		}
+		input {
+			width: 93px;
+		}
+		input[type=button] {
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+	<h4><a href="https://arsen0105.github.io/Programming-Tools-and-Methods/">← Назад</a></h4>
+	<h3 id="task_1">Условие задачи</h3>
+	<h4>
+		<a href="https://github.com/Arsen0105/Programming-Tools-and-Methods/blob/main/code_4/task4.py" target="_blank">Python Код</a>
+		для решения
+	</h4>
+	<p>
+		Написать программу решения следующей задачи:
+		<br>
+		Дано: размер пустой квадратной шахматной доски N = <b id="t1_n_text">10</b>
+		<br>
+		Найти: число всех возможных расстановок N ферзей на доске.
+	</p>
+	<table><p>
+		<tr>
+			<td>Всего ферзей</td>
+			<td><input type="number" id="t1_n" value="10"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
+				<input type="button" onclick="solution_task_1();" value="Решить">
+			</td>
+		</tr>
+	</p></table>
+	<h3 id="answer_1"></h3>
+</body>
+</html>
