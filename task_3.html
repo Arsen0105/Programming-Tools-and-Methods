@@ -55,11 +55,11 @@
 					check(i);
 				}
 
-				s = '';
-				for (let i = a; i <= b; i++) {
+				let s = '';
+				for (let i = Number(a); i <= b; i++) {
 					if (n - i > 0) {
 						if (!d.get(n - i)) {
-							s += i + ' ';
+							s += i + checkbox_state + ' ';
 						}
 					}
 				}
@@ -94,6 +94,13 @@
 			document.getElementById("answer_3").innerHTML = "Ответ на задачу:  " + t();
 		}
 
+		checkbox_state = 1;
+		checkbox_states = ["Проигрывает", "Выигрывает"];
+
+		function click_checkbox() {
+			checkbox_state ^= 1;
+			document.getElementById("t3_flag_text").innerHTML = checkbox_states[checkbox_state];
+		}
 	</script>
 	<style type="text/css">
 		body {
@@ -176,7 +183,7 @@
 	<p>
 		Из <b id="t3_n_text">30</b> спичек двое игроков берут по своему усмотрению от <b id="t3_a_text">1</b>
 		<br>
-		до <b id="t3_b_text">6</b> спичек. Выигрывает тот, кто берет последнюю спичку.
+		до <b id="t3_b_text">6</b> спичек. <b id="t3_flag_text">Выигрывает</b> тот, кто берет последнюю спичку.
 		<br>
 		Сколько спичек должен взять первый игрок, чтобы выиграть?
 	</p>
@@ -192,6 +199,10 @@
 		<tr>
 			<td>До</td>
 			<td><input type="number" id="t3_b" value="6"></td>
+		</tr>
+		<tr>
+			<td>Выигрывает <br> последний</td>
+			<td><input type="checkbox" id="t3_flag" checked onclick="click_checkbox();"></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="right">
